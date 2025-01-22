@@ -1,10 +1,9 @@
-
-
 # Load necessary libraries
 library(shiny)
 library(shinyjs)  # For dynamic notifications
 library(isoviz)
 library(dplyr)
+library(markdown)
 
 # Increase max request size to 100MB
 options(shiny.maxRequestSize = 100 * 1024^2)
@@ -45,11 +44,14 @@ ui <- fluidPage(
         tabPanel("Guide Table",
                  tableOutput("guide_table"),
                  h4("Your guide table will appear here.")
+        ),
+        tabPanel("Help",  # New Help Tab
+                 includeMarkdown("README.md")  # Display README.md content
         )
       )
     )
-  ) # Closing sidebarLayout
-) # Closing fluidPage
+  )
+)
 
 # Server Logic
 server <- function(input, output, session) {
